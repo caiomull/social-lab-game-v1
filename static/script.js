@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // --- Chamada ao Python ---
-            const resposta = await fetch('http://127.0.0.1:5000/avancar_ano', {
+            const resposta = await fetch('/avancar_ano', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ estado: dadosParaEnviar, escolha: escolhaParaEnviar })
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             outputSaude.textContent = "Erro!";
             outputOrcamento.textContent = "Erro!";
             outputHistorico.textContent = `Falha na simulação: ${erro.message}`;
-            outputRelatorioIA.textContent = `Falha ao gerar relatório: ${erro.message}`;
+            outputEventoIA.textContent = `Falha ao gerar relatório: ${erro.message}`;
             btnAvancar.disabled = false;
             if (estadoAtualDoJogo) {
                 atualizarBotoesDeDecisao(estadoAtualDoJogo.orcamento);
