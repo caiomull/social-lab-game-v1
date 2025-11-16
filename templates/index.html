@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório Social - Gestão</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>🧪 Laboratório Social (Gestão v1.0)</h1>
+    </header>
+
+    <main class="container">
+        
+        <nav class="tab-nav">
+            <button id="btn-tab-controles" class="tab-button ativo">Controles & Decisões</button>
+            <button id="btn-tab-visual" class="tab-button">Visualizar Sociedade</button>
+        </nav>
+
+        <section id="aba-controles" class="tab-content">
+            
+            <section class="controles">
+                <h2>Variáveis de Início</h2>
+                
+                <div class="controle-slider">
+                    <label for="slider-educacao">Educação Inicial (0-100):</label>
+                    <span id="valor-educacao">50</span>
+                    <input type="range" id="slider-educacao" min="0" max="100" value="50">
+                </div>
+                <div class="controle-slider">
+                    <label for="slider-desigualdade">Desigualdade Inicial (0-100):</label>
+                    <span id="valor-desigualdade">50</span>
+                    <input type="range" id="slider-desigualdade" min="0" max="100" value="50">
+                </div>
+                <div class="controle-slider">
+                    <label for="slider-tecnologia">Tecnologia Inicial (0-100):</label>
+                    <span id="valor-tecnologia">50</span>
+                    <input type="range" id="slider-tecnologia" min="0" max="100" value="50">
+                </div>
+                <div class="controle-slider">
+                    <label for="slider-economia">Economia Inicial (10-100):</label>
+                    <span id="valor-economia">50</span>
+                    <input type="range" id="slider-economia" min="10" max="100" value="50">
+                </div>
+                <div class="controle-slider">
+                    <label for="slider-saude">Saúde Inicial (0-100):</label>
+                    <span id="valor-saude">50</span>
+                    <input type="range" id="slider-saude" min="0" max="100" value="50">
+                </div>
+
+                <div class="decisoes-container">
+                    <h3>Decisão Anual</h3>
+                    <p>Escolha o seu foco para o próximo ano.</p>
+                    <div class="decisoes-botoes">
+                        <button class="btn-decisao" id="btn-decisao-edu" data-choice="educacao" data-cost="10">
+                            🎓 Investir em Educação (Custo: 10)
+                        </button>
+                        <button class="btn-decisao" id="btn-decisao-tec" data-choice="tecnologia" data-cost="10">
+                            💻 Focar em Tecnologia (Custo: 10)
+                        </button>
+                        <button class="btn-decisao" id="btn-decisao-social" data-choice="social" data-cost="15">
+                            🤝 Leis Sociais (Custo: 15)
+                        </button>
+                        <button class="btn-decisao" id="btn-decisao-saude" data-choice="saude" data-cost="10">
+                            🏥 Expandir Saúde (Custo: 10)
+                        </button>
+                    </div>
+                    <p><small>Escolha atual: <strong id="escolha-atual">Nenhuma</strong></small></p>
+                </div>
+
+                <button id="btn-avancar-ano">Iniciar Jogo</button>
+            </section>
+
+            <section class="resultado">
+                <h2>Resultados do Ano <span id="ano-atual">0</span></h2>
+                <div class="card-resultado card-principal">
+                    <h3>💰 Orçamento</h3>
+                    <p id="output-orcamento">?</p>
+                </div>
+                <div class="card-resultado">
+                    <h3>📈 Economia</h3>
+                    <p id="output-economia">?</p>
+                </div>
+                <div class="card-resultado">
+                    <h3>🏥 Saúde</h3>
+                    <p id="output-saude">?</p>
+                </div>
+                <div class="card-resultado">
+                    <h3>🤝 Cooperação</h3>
+                    <p id="output-cooperacao">?</p>
+                </div>
+                <div class="card-resultado">
+                    <h3>⚔️ Conflito</h3>
+                    <p id="output-conflito">?</p>
+                </div>
+            </section>
+        </section> <section id="aba-visual" class="tab-content" style="display: none;">
+            
+            <section class="visualizador-container">
+                <h2>Visão da Sociedade</h2>
+                <div id="visualizador">
+                    <div class="viz-camada" id="viz-base"></div>
+                    <div class="viz-camada" id="viz-filtro-conflito" style="display: none;"></div>
+                    
+                    <div class="viz-camada sprite" id="viz-escola" style="display: none;"></div>
+                    <div class="viz-camada sprite" id="viz-fabrica-lvl1" style="display: none;"></div>
+                    <div class="viz-camada sprite" id="viz-fabrica-lvl2" style="display: none;"></div>
+                    <div class="viz-camada sprite" id="viz-hospital" style="display: none;"></div>
+                    <div class="viz-camada sprite" id="viz-parque" style="display: none;"></div>
+                </div>
+            </section>
+
+            <section class="relatorio-ia">
+                <h2>Eventos do Ano (Análise da IA)</h2>
+                <div class="card-ia" id="output-evento-ia">
+                    Pronto para iniciar a simulação...
+                </div>
+            </section>
+
+            <section class="grafico-container">
+                <h2>Evolução Temporal</h2>
+                <div class="grafico">
+                    <canvas id="grafico-simulacao"></canvas>
+                </div>
+            </section>
+            
+            <section class="historico">
+                <h2>Histórico da Simulação</h2>
+                <pre id="output-historico"></pre>
+            </section>
+            
+        </section> </main> <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
